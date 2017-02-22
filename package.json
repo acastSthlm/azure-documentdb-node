@@ -1,0 +1,8 @@
+{
+  "name": "acast-documentdb",
+  "version": "1.10.1",
+  "main": "./index.js",
+  "scripts": {
+    "postinstall": "cd source && npm install"
+  }
+}

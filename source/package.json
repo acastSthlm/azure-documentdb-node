@@ -1,5 +1,5 @@
 {
-  "name": "documentdb",
+  "name": "acast-documentdb",
   "description": "Azure DocumentDB Node.js client",
   "keywords": [
     "documentdb",
