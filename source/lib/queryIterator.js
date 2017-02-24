@@ -145,7 +145,7 @@ var QueryIterator = Base.defineClass(
 
                 if (resource === undefined) {
                     // no more results
-                    return callback(undefined, that.toArrayTempResources, that.toArrayTempHeaders);
+                    return callback(undefined, that.toArrayTempResources, aggregateExecutionInfo(that.toArrayTempHeaders));
                 }
 
                 // concatinate the results and fetch more
@@ -186,6 +186,16 @@ var QueryIterator = Base.defineClass(
         }
     }
 );
+
+function aggregateExecutionInfo(headers) {
+    return {
+        sumRequestCharges: headers.reduce(function (acc, header) {
+            var requestCharge = parseFloat(header["x-ms-request-charge"]);
+            return acc + isNaN(requestCharge) ? 0 : requestCharge;
+        }, 0),
+        numberOfRequests: headers.length
+    };
+}
 //SCRIPT END
 
 if (typeof exports !== "undefined") {
