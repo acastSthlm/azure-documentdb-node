@@ -191,7 +191,10 @@ function aggregateExecutionInfo(headers) {
     return {
         sumRequestCharges: headers.reduce(function (acc, header) {
             var requestCharge = parseFloat(header["x-ms-request-charge"]);
-            return acc + isNaN(requestCharge) ? 0 : requestCharge;
+            if(isNaN(requestCharge)) {
+                return acc;
+            }
+            return acc + requestCharge;
         }, 0),
         numberOfRequests: headers.length
     };
